@@ -36,7 +36,7 @@ const CompanyForm = () => {
     formData.append('logo', logo);
 
     try {
-      const response = await axios.post('http://localhost:5000/api/upload-company', formData, {
+      const response = await axios.post('https://ledger-flow-backend.vercel.app/api/upload-company', formData, {
         headers: { 'Content-Type': 'multipart/form-data' },
         withCredentials: true,
       });
