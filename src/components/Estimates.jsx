@@ -29,7 +29,7 @@ const Estimates = () => {
     //console.log(role);
   const fetchCustomers = async () => {
     try {
-      const response = await axios.get('http://localhost:5000/api/customers',{
+      const response = await axios.get('https://ledger-flow-backend.vercel.app/api/customers',{
         headers: {
           'company': companyId,
           'role': role
@@ -49,14 +49,14 @@ const Estimates = () => {
       try {
         if (isEdit) {
           // Update the estimate
-          await axios.post(`http://localhost:5000/api/add-estimate`, {
+          await axios.post(`https://ledger-flow-backend.vercel.app/api/add-estimate`, {
             customer_id: customerId,
             estimate: amount,
           });
           setIsEdit(false); // Reset to add mode
         } else {
           // Add new estimate
-          await axios.post('http://localhost:5000/api/add-estimate', {
+          await axios.post('https://ledger-flow-backend.vercel.app/api/add-estimate', {
             customer_id: customerId,
             estimate: amount,
           });
