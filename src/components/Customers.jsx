@@ -142,7 +142,7 @@
       const companyId = selectedCompany || localStorage.getItem("company_id");
     
       try {
-        await axios.post("http://localhost:5000/api/add-customer", newCustomer, {
+        await axios.post("https://ledger-flow-backend.vercel.app/api/add-customer", newCustomer, {
           headers: {
             company: companyId,
             role: role,
