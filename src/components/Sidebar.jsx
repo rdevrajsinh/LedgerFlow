@@ -16,7 +16,7 @@ const Sidebar = ({ isMobile, isSidebarOpen, handleSidebarToggle }) => {
     setRole(userRole);
 
     if (companyId) {
-      axios.get(`http://localhost:5000/api/company/${companyId}`, { responseType: 'blob' })
+      axios.get(`https://ledger-flow-backend.vercel.app/api/company/${companyId}`, { responseType: 'blob' })
         .then(response => {
           const url = URL.createObjectURL(response.data);
           setCompanyLogo(url);
