@@ -59,7 +59,7 @@
           //console.log(companyId);
   
           try {
-              const response = await axios.get('http://localhost:5000/api/customers', {
+              const response = await axios.get('https://ledger-flow-backend.vercel.app/api/customers', {
                   headers: {
                       'company': companyId, // Send company_id in headers
                       'role': role // Corrected header name
@@ -77,7 +77,7 @@
   
       const fetchVendors = async () => {
           try {
-              const response = await axios.get('http://localhost:5000/api/vendors');
+              const response = await axios.get('https://ledger-flow-backend.vercel.app/api/vendors');
               const transformedVendors = response.data.map(vendor => ({
                   id: vendor[0], // Assuming the first element is the ID
                   name: vendor[1], // Assuming the second element is the name
@@ -91,7 +91,7 @@
   
       const fetchCompanies = async () => {
         try {
-          const response = await axios.get('http://localhost:5000/api/companies');
+          const response = await axios.get('https://ledger-flow-backend.vercel.app/api/companies');
           //console.log("Fetched Companies:", response.data); // Log the fetched companies
 
           setCompanies(response.data);
@@ -154,7 +154,7 @@
     
         // Fetch company logo based on companyId
         axios
-          .get(`http://localhost:5000/api/company/${companyId}`, {
+          .get(`https://ledger-flow-backend.vercel.app/api/company/${companyId}`, {
             responseType: "blob",
           })
           .then((response) => {
@@ -217,7 +217,7 @@
     };
 
     const fetchVendorDetails = async (vendorId) => {
-      const response = await fetch(`http://localhost:5000/api/vendors/${vendorId}`);
+      const response = await fetch(`https://ledger-flow-backend.vercel.app/api/vendors/${vendorId}`);
       const vendorData = await response.json();
       return vendorData;
     };
@@ -238,7 +238,7 @@
     };
 
     const handleDeliveredDate = (customerId) => {
-      axios.put(`http://localhost:5000/api/update-delivered-date/${customerId}`)
+      axios.put(`https://ledger-flow-backend.vercel.app/api/update-delivered-date/${customerId}`)
         .then(response => {
           setCustomers(customers.map(customer =>
             customer.id === customerId ? { ...customer, delivered_date: response.data.delivered_date } : customer
@@ -562,7 +562,7 @@
     };
     
     const handleEditCustomerSubmit = () => {
-      axios.put(`http://localhost:5000/api/update-customers/${editCustomer.id}/update_received_date`, {
+      axios.put(`https://ledger-flow-backend.vercel.app/api/update-customers/${editCustomer.id}/update_received_date`, {
         name: editCustomer.name,
         email: editCustomer.email,
         phone: editCustomer.phone,
@@ -881,7 +881,7 @@
   onClick={() => {
     const companyId = selectedCustomer.company_id;
     if (companyId) {
-      axios.get(`http://localhost:5000/api/company/${companyId}`, { responseType: "blob" })
+      axios.get(`https://ledger-flow-backend.vercel.app/api/company/${companyId}`, { responseType: "blob" })
         .then(response => {
           const url = URL.createObjectURL(response.data);
           generateInvoice(url); // Pass the logo URL to generateInvoice
