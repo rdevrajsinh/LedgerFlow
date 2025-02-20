@@ -36,7 +36,7 @@ export default function SignIn() {
   useEffect(() => {
     const fetchCompanies = async () => {
       try {
-        const response = await fetch("http://localhost:5000/api/companies");
+        const response = await fetch("https://ledger-flow-backend.vercel.app/api/companies");
         const data = await response.json();
         setCompanies(data);
       } catch (error) {
@@ -69,7 +69,7 @@ export default function SignIn() {
     }
 
     try {
-      const response = await fetch("http://localhost:5000/api/register", {
+      const response = await fetch("https://ledger-flow-backend.vercel.app/api/register", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         credentials: "include",
