@@ -43,7 +43,7 @@ const [logoUrl, setLogoUrl] = useState('');
   useEffect(() => {
     const companyId = localStorage.getItem("company_id");
     const role = localStorage.getItem("role");
-    axios.get('http://localhost:5000/api/vendors')
+    axios.get('https://ledger-flow-backend.vercel.app/api/vendors')
       .then(response => {
         const formattedVendors = response.data.map((vendor) => ({
           id: vendor[0],   // First element is ID
@@ -54,7 +54,7 @@ const [logoUrl, setLogoUrl] = useState('');
       })
       .catch(error => console.error('Error fetching vendors:', error));
 
-    axios.get('http://localhost:5000/api/customers',
+    axios.get('https://ledger-flow-backend.vercel.app/api/customers',
       
        { headers: {
           'company': companyId,
@@ -104,7 +104,7 @@ const [logoUrl, setLogoUrl] = useState('');
   // Handle form submission for adding new vendor
   const handleAddVendorSubmit = () => {
     if (newVendor.name) {
-      axios.post('http://localhost:5000/api/add-vendor', newVendor)
+      axios.post('https://ledger-flow-backend.vercel.app/api/add-vendor', newVendor)
         .then(response => {
           setVendors([...vendors, response.data]); // Adding newly added vendor to the state
           setOpenAddVendor(false); // Closing modal
@@ -141,7 +141,7 @@ const [logoUrl, setLogoUrl] = useState('');
         };
 
         try {
-            const response = await axios.post('http://localhost:5000/api/vendors/assign_customer', data);
+            const response = await axios.post('https://ledger-flow-backend.vercel.app/api/vendors/assign_customer', data);
             alert(response.data.message);
 
             const newVendor = vendors.find(vendor => vendor.id === selectedVendor);
@@ -169,7 +169,7 @@ const fetchLogo = async (customerId) => {
       }
 
       console.log("Fetching logo for customer:", customerId);
-      const response = await axios.get(`http://localhost:5000/api/company/${customer.company_id}`, {
+      const response = await axios.get(`https://ledger-flow-backend.vercel.app/api/company/${customer.company_id}`, {
           responseType: 'blob'
       });
 
@@ -278,7 +278,7 @@ const generateInvoicePDF = async (customer, previousVendor, logo) => {
   const handleViewCustomers = async (vendorId) => {
     try {
       setLoading(true);
-      const response = await axios.get(`http://localhost:5000/api/vendors/${vendorId}/customers`,
+      const response = await axios.get(`https://ledger-flow-backend.vercel.app/api/vendors/${vendorId}/customers`,
         {
           headers: {  
             'company': localStorage.getItem("company_id"),
@@ -304,7 +304,7 @@ const generateInvoicePDF = async (customer, previousVendor, logo) => {
   const handleDeleteVendor = async (vendorId) => {
     if (window.confirm('Are you sure you want to delete this vendor?')) {
       try {
-        await axios.delete(`http://localhost:5000/api/vendors/${vendorId}`);
+        await axios.delete(`https://ledger-flow-backend.vercel.app/api/vendors/${vendorId}`);
         setVendors(vendors.filter(vendor => vendor.id !== vendorId));
         alert('Vendor deleted successfully');
       } catch (error) {
@@ -331,7 +331,7 @@ const generateInvoicePDF = async (customer, previousVendor, logo) => {
   const handleReceivedDialogSubmit = () => {
     const receivedDate = new Date().toISOString().split('T')[0]; // Get current date
   
-    axios.post(`http://localhost:5000/api/customers/${currentCustomerId}/update_received_date`, {
+    axios.post(`https://ledger-flow-backend.vercel.app/api/customers/${currentCustomerId}/update_received_date`, {
       received_date: receivedDate,
       remark,
       checkbox6,
@@ -349,7 +349,7 @@ const generateInvoicePDF = async (customer, previousVendor, logo) => {
         ));
         console.log('Updated total:', updatedTotal);
         // Optionally, send the updated total to the backend
-        axios.put(`http://localhost:5000/api/vendors/${selectedVendorId}/update-total`, { total: updatedTotal })
+        axios.put(`https://ledger-flow-backend.vercel.app/api/vendors/${selectedVendorId}/update-total`, { total: updatedTotal })
           .then(response => {
             //console.log('Vendor total updated successfully', response.data);
           })
@@ -418,7 +418,7 @@ const generateInvoicePDF = async (customer, previousVendor, logo) => {
         vendor.id === selectedVendorId ? { ...vendor, total: newTotal } : vendor
       ));
       // Send the updated total to the backend (Flask)
-      axios.put(`http://localhost:5000/api/vendors/${selectedVendorId}/update-total`, { total: newTotal })
+      axios.put(`https://ledger-flow-backend.vercel.app/api/vendors/${selectedVendorId}/update-total`, { total: newTotal })
         .then(response => {
           //console.log('Vendor total updated successfully', response.data);
           setIsEditing(false); // Disable editing
