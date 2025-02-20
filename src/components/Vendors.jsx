@@ -372,6 +372,7 @@ const generateInvoicePDF = async (customer, previousVendor, logo) => {
       console.error("Error updating received date:", error);
       alert("Failed to update received date.");
     });
+    window.location.reload();
   };
 
 
