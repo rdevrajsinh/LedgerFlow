@@ -32,7 +32,7 @@ const Users = () => {
   useEffect(() => {
     const fetchUsers = async () => {
       try {
-        const response = await axios.get('http://localhost:5000/api/users');
+        const response = await axios.get('https://ledger-flow-backend.vercel.app/api/users');
         setUsers(response.data);
       } catch (error) {
         console.error('Error fetching users:', error);
@@ -41,7 +41,7 @@ const Users = () => {
 
     const fetchCompanies = async () => {
       try {
-        const response = await axios.get('http://localhost:5000/api/companies');
+        const response = await axios.get('https://ledger-flow-backend.vercel.app/api/companies');
         setCompanies(response.data);
       } catch (error) {
         console.error('Error fetching companies:', error);
@@ -85,7 +85,7 @@ const Users = () => {
 
       console.log('Updating user with data:', updateData); // Log the data being sent
 
-      await axios.put(`http://localhost:5000/api/users/${selectedUser .id}`, updateData);
+      await axios.put(`https://ledger-flow-backend.vercel.app/api/users/${selectedUser .id}`, updateData);
       setUsers(users.map(user => (user.id === selectedUser .id ? selectedUser   : user)));
       handleCloseEditDialog();
       window.location.reload(); // Reload the page after submission
