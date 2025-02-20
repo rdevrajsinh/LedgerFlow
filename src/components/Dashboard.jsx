@@ -87,7 +87,7 @@ const Dashboard = () => {
     const role = localStorage.getItem("role");
   
     // Fetch customers from the API with headers
-    axios.get('http://localhost:5000/api/customers', {
+    axios.get('https://ledger-flow-backend.vercel.app/api/customers', {
       headers: {
         'company': companyId,
         'role': role
@@ -137,7 +137,7 @@ const Dashboard = () => {
     .catch(error => console.error(error));
   
     // Fetch vendors from the API with headers
-    axios.get('http://localhost:5000/api/vendors')
+    axios.get('https://ledger-flow-backend.vercel.app/api/vendors')
     .then(response => {
       setVendors(response.data);
     })
