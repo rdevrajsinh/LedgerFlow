@@ -16,7 +16,7 @@ const ExportButton = () => {
   useEffect(() => {
     const fetchCompanies = async () => {
       try {
-        const response = await axios.get("http://localhost:5000/api/companies"); // Replace with your actual endpoint
+        const response = await axios.get("https://ledger-flow-backend.vercel.app/api/companies"); // Replace with your actual endpoint
         setCompanies(response.data);
       } catch (error) {
         console.error("Error fetching companies:", error);
@@ -31,7 +31,7 @@ const ExportButton = () => {
       const companyId = localStorage.getItem("company_id"); // Replace with your actual logic to get company ID
   
       // Fetch all customer data from the backend
-      const response = await axios.get("http://localhost:5000/api/customers", {
+      const response = await axios.get("https://ledger-flow-backend.vercel.app/api/customers", {
         headers: {
           company: companyId, // Include company ID in headers
           role: role, // Include role in headers
